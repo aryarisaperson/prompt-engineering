@@ -1,2 +1,1 @@
-GROQ_API_KEY="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"
-HF_API_KEY="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"
+print("hi")

@@ -1,9 +1,17 @@
+# groq.py (pip install openai)
+
 import config
+
 from openai import OpenAI
+
 GROQ_URL = "https://api.groq.com/openai/v1"
+
 MODELS = getattr(config, "GROQ_MODELS", ["llama-3.1-8b-instant", "mixtral-8x7b-32768"])
+
 def generate_response(prompt: str, temperature: float = 0.3, max_tokens: int = 512) -> str:
+
     key = getattr(config, "GROQ_API_KEY", None)
+
     if not key:
 
         return "Error: GROQ_API_KEY missing in config.py"
@@ -34,18 +42,15 @@ def generate_response(prompt: str, temperature: float = 0.3, max_tokens: int = 5
 
             last_err = e
 
-    return (
+    return ("Groq model failed.\n"
 
-"Groq model failed.\n"
+    f"Tried models: {MODELS}\n"
 
-f"Tried models: {MODELS}\n"
+    "Fix:\n"
 
-"Fix:\n"
+    "1) Switch to hf by importing hf.py in main.py OR\n"
 
-"1) Switch to hf by importing hf.py in main.py OR\n"
+    "2) Replace Groq model in groq.py (GROQ_MODELS).\n"
+    f"Details: {type(last_err).__name__}: {last_err}"
 
-"2) Replace Groq model in groq.py (GROQ_MODELS).\n"
-
-f"Details: {type(last_err).__name__}: {last_err}"
-
-)
+        )
