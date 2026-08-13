@@ -10,7 +10,7 @@ def reinforcement():
     print(f"\nInit AI responses: {init_response}")
     try:
         rating=int(input("rate the response from 1 to 5:").strip())
-        if rating <1 or rating >1:
+        if rating <1 or rating >5:
             print("invalid rating. using 3.")
             rating=3
     except ValueError:
